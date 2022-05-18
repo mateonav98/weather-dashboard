@@ -18,6 +18,7 @@ apiKey = "c46f2990592153f3323f237a20612ab6"
 
 var searchBtn = document.querySelector('#searchBtn');
 var citySearch = document.querySelector('#citySearch');
+var currentDate = moment().format("MM/DD/YYYY")
 
 function findCity(event) {
   event.preventDefault();
@@ -56,7 +57,8 @@ function weatherData(city) {
           }})
         .then(function (data) {
           console.log(data);
-          $("#cityName").text(cityName);
+          $("#currentDate").text("Hello, today is " + currentDate)
+          $("#cityName").text("In " + cityName + "...");
           $("#temp").text("Today's Temperature: " + data.current.temp + " °K");
           $("#weatherIcon").attr({"src":"http://openweathermap.org/img/wn/" + data.current.weather[0].icon + ".png"}); $("#humidity").text("Humidity: " + data.current.humidity + "%");
           $("#windSpeed").text("Current Wind Speed: " + data.current.wind_speed + " mph");

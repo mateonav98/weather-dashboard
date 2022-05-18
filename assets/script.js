@@ -38,7 +38,7 @@ function weatherData (city) {
                 }})
                 .then(function (data) {
                     console.log(data);
-
+  
     })
     })}
 

@@ -14,16 +14,32 @@
 // let city = document.querySelector("#citySearch")
 
 apiKey = "c46f2990592153f3323f237a20612ab6"
-city = "San Jose, California"
+// city = "San Jose, California"
+
+var searchBtn = document.querySelector('#searchBtn');
+var citySearch = document.querySelector('#citySearch');
+
+function findCity(event) {
+  event.preventDefault();
+  let city = citySearch.value;
+  console.log(city)
+  if (citySearch) {
+    weatherData(city)
+  } else {
+    alert("Could not find city");
+  }
+  return;
+}
+searchBtn.addEventListener("click", findCity);
 
 
-function weatherData (city) {
+function weatherData(city) {
   let queryUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey
   fetch(queryUrl)
-  .then(function (response) {
-    if (response.ok) {
-      return response.json();
-    }})
+    .then(function (response) {
+      if (response.ok) {
+        return response.json();
+      }})
     .then(function(data){
       console.log(data);
       cityName = data.name
@@ -33,22 +49,22 @@ function weatherData (city) {
       latData = data.coord.lat
       console.log(data.coord.lat);
       var apiURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + latData + "&lon=" + lonData + "&appid=" + apiKey;
-            fetch(apiURL)
-                .then(function (response) {
-                  if (response.ok) {
-                    return response.json()
-                }})
-                .then(function (data) {
-                    console.log(data);
-                    $("#cityName").text(cityName);
-                    $("#temp").text("Today's Temperature: " + data.current.temp + " °C");
-                    $("#weatherIcon").attr({"src":"http://openweathermap.org/img/wn/" + data.current.weather[0].icon + ".png"});                    $("#humidity").text("Humidity: " + data.current.humidity + "%");
-                    $("#windSpeed").text("Current Wind Speed: " + data.current.wind_speed + " mph");
-                    $("#UVindex").text("UV Index: " + data.current.uvi);
-    })
-    })}
+      fetch(apiURL)
+        .then(function (response) {
+          if (response.ok) {
+            return response.json()
+          }})
+        .then(function (data) {
+          console.log(data);
+          $("#cityName").text(cityName);
+          $("#temp").text("Today's Temperature: " + data.current.temp + " °K");
+          $("#weatherIcon").attr({"src":"http://openweathermap.org/img/wn/" + data.current.weather[0].icon + ".png"}); $("#humidity").text("Humidity: " + data.current.humidity + "%");
+          $("#windSpeed").text("Current Wind Speed: " + data.current.wind_speed + " mph");
+          $("#UVindex").text("UV Index: " + data.current.uvi);
+        })
+})
+    return
+}
 
 
-  
 
-  weatherData (city)

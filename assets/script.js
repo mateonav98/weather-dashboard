@@ -15,6 +15,8 @@
 
 apiKey = "c46f2990592153f3323f237a20612ab6"
 city = "San Jose, California"
+
+
 function weatherData (city) {
   let queryUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey
   fetch(queryUrl)
@@ -38,7 +40,11 @@ function weatherData (city) {
                 }})
                 .then(function (data) {
                     console.log(data);
-  
+                    $("#cityName").text(cityName);
+                    $("#temp").text("Today's Temperature: " + data.current.temp + " °C");
+                    $("#weatherIcon").attr({"src":"http://openweathermap.org/img/wn/" + data.current.weather[0].icon + ".png"});                    $("#humidity").text("Humidity: " + data.current.humidity + "%");
+                    $("#windSpeed").text("Current Wind Speed: " + data.current.wind_speed + " mph");
+                    $("#UVindex").text("UV Index: " + data.current.uvi);
     })
     })}
 

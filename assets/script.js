@@ -11,7 +11,7 @@
 // WHEN I click on a city in the search history
 // THEN I am again presented with current and future conditions for that city
 
-// let citySearch = document.querySelector("#citySearch")
+// let city = document.querySelector("#citySearch")
 
 apiKey = "c46f2990592153f3323f237a20612ab6"
 city = "San Jose, California"
@@ -24,12 +24,25 @@ function weatherData (city) {
     }})
     .then(function(data){
       console.log(data);
+      cityName = data.name
       console.log (data.name)
-      console.log(data.weather.icon)
-      console.log(data.main.temp)
-      console.log(data.main.humidity)
-      console.log(data.wind.speed)
+      lonData = data.coord.lon
+      console.log(data.coord.lon)
+      latData = data.coord.lat
+      console.log(data.coord.lat);
+      var apiURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + latData + "&lon=" + lonData + "&appid=" + apiKey;
+            fetch(apiURL)
+                .then(function (response) {
+                  if (response.ok) {
+                    return response.json()
+                }})
+                .then(function (data) {
+                    console.log(data);
+
     })
-  }
+    })}
+
+
+  
 
   weatherData (city)

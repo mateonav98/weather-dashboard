@@ -2,8 +2,6 @@
 // WHEN I search for a city
 // THEN I am presented with current and future conditions for that city and that city is added to the search history
 // WHEN I view current weather conditions for that city
-// THEN I am presented with the city name, the date, a
-// n icon representation of weather conditions, the temperature, the humidity, the wind speed, and the UV index
 // WHEN I view the UV index
 // THEN I am presented with a color that indicates whether the conditions are favorable, moderate, or severe
 // WHEN I view future weather conditions for that city
@@ -19,32 +17,41 @@ apiKey = "c46f2990592153f3323f237a20612ab6"
 var searchBtn = document.querySelector('#searchBtn');
 var citySearch = document.querySelector('#citySearch');
 var searchDataEl = document.querySelector("#searchData")
-var currentDate = moment().format("MM/DD/YYYY")
+var currentDate = moment().format("MM/DD/YYYY");
+var searches = [];
 
-renderSearches();
 
 function renderSearches() {
-  var city = localStorage.getItem("city");
+
+  var city = JSON.parse(localStorage.getItem("searches"));
 //If either email or password is null, we exit the function with return. Otherwise, we render the values using the textContent property in the userEmailSpan and userPasswordSpan elements
   if (!city) {
+    searches = city
     return;
   }
-  $("#searchData").text(city)
-  
+}
+
+function storeSearches() {
+  localStorage.setItem("searches", JSON.stringify(searches));
 }
 
 searchBtn.addEventListener("click", function(event) {
-  event.preventDefault();
+
   var city = citySearch.value;
   console.log(city)
-  if (citySearch) {
+  if (city) {
     weatherData(city)
   } else {
     alert("Could not find city");
     return;
   }
-  localStorage.setItem("city", city)
+  searches.push(city)
+  citySearch.value = ""
+  
   renderSearches();
+  storeSearches();
+ $("#searchData").text(searches + " ")
+return
 
 });
 

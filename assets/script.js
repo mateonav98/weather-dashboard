@@ -1,26 +1,26 @@
 
 
 // GIVEN a weather dashboard with form inputs
-// WHEN I search for a city
-// THEN I am presented with current and future conditions for that city and that city is added to the search history
-// WHEN I view the UV index
-// THEN I am presented with a color that indicates whether the conditions are favorable, moderate, or severe
-// WHEN I view future weather conditions for that city
-// THEN I am presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, and the humidity
+
+
+
 // WHEN I click on a city in the search history
 // THEN I am again presented with current and future conditions for that city
 
 
 apiKey = "c46f2990592153f3323f237a20612ab6"
-// city = "San Jose, California"
+
 
 var searchBtn = document.querySelector('#searchBtn');
 var citySearch = document.querySelector('#citySearch');
 var searchDataEl = document.querySelector("#searchData")
-var currentDate = moment().format("MM/DD/YYYY");
+var currentDate = moment().format("MMM Do, YYYY");
+var cityList = document.querySelector("pastSearches")
 var searches = [];
 
 
+// WHEN I search for a city
+// THEN I am presented with current and future conditions for that city and that city is added to the search history
 function renderSearches() {
 
   var city = JSON.parse(localStorage.getItem("searches"));
@@ -31,12 +31,18 @@ function renderSearches() {
   }
 }
 
+// function cityList() {
+//   var searchHistory = JSON.parse(localStorage.getItem("searches"));
+//   if (searchHistory ==)
+
+// }
+
 function storeSearches() {
   localStorage.setItem("searches", JSON.stringify(searches));
 }
 
 searchBtn.addEventListener("click", function(event) {
-
+  event.preventDefault();
   var city = citySearch.value;
   console.log(city)
   if (city) {
@@ -87,6 +93,22 @@ function weatherData(city) {
           $("#humidity").text("Humidity: " + data.current.humidity + "%");
           $("#windSpeed").text("Current Wind Speed: " + data.current.wind_speed + " mph");
           $("#UVindex").text("UV Index: " + data.current.uvi);
+
+          // WHEN I view the UV index
+          // THEN I am presented with a color that indicates whether the conditions are favorable, moderate, or severe
+          //severe
+          if(data.current.uvi >= 6) {
+            $("#UVindex").css("background-color", "red")
+          //moderate
+        } else if(data.current.uvi >= 3) {
+            $("#UVindex").css("background-color", "yellow")
+          // favorable
+        } else {
+            $("#UVindex").css("background-color", "green")
+        }
+
+          // WHEN I view future weather conditions for that city
+          // THEN I am presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, and the humidity
           // Day 1 Forcast
           $("#day1").text(moment().add(1, 'day').format("MMM Do, YYYY"));
           $("#icon1").attr({"src":"http://openweathermap.org/img/wn/" + data.daily[1].weather[0].icon + ".png"});

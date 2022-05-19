@@ -82,7 +82,7 @@ function weatherData(city) {
           console.log(data);
           $("#currentDate").text("Hello, today is " + currentDate)
           $("#cityName").text("In " + cityName + "...");
-          $("#temp").text("Today's Temperature: " + data.current.temp + " °K");
+          $("#temp").text("Today's Temperature: " + Math.round((data.current.temp - 273.25) * (9/5) + 32) + " °F");
           $("#weatherIcon").attr({"src":"http://openweathermap.org/img/wn/" + data.current.weather[0].icon + ".png"}); 
           $("#humidity").text("Humidity: " + data.current.humidity + "%");
           $("#windSpeed").text("Current Wind Speed: " + data.current.wind_speed + " mph");
@@ -90,27 +90,27 @@ function weatherData(city) {
           // Day 1 Forcast
           $("#day1").text(moment().add(1, 'day').format("MMM Do, YYYY"));
           $("#icon1").attr({"src":"http://openweathermap.org/img/wn/" + data.daily[1].weather[0].icon + ".png"});
-          $("#temp1").text("Temp: " + data.daily[1].temp.day + " °K");
+          $("#temp1").text("Temp: " + Math.round((data.daily[1].temp.day - 273.25) * (9/5) + 32) + " °F");
           $("#humidity1").text("Humidity: " + data.daily[1].humidity + "%");
           // Day 2 Forcast
           $("#day2").text(moment().add(2, 'day').format("MMM Do, YYYY"));
           $("#icon2").attr({"src":"http://openweathermap.org/img/wn/" + data.daily[2].weather[0].icon + ".png"});
-          $("#temp2").text("Temp: " + data.daily[2].temp.day + " °K");
+          $("#temp2").text("Temp: " + Math.round((data.daily[2].temp.day - 273.25) * (9/5) + 32) + " °F");
           $("#humidity2").text("Humidity: " + data.daily[2].humidity + "%");
           // Day 3 Forcast
           $("#day3").text(moment().add(3, 'day').format("MMM Do, YYYY"));
           $("#icon3").attr({"src":"http://openweathermap.org/img/wn/" + data.daily[3].weather[0].icon + ".png"});
-          $("#temp3").text("Temp: " + data.daily[3].temp.day + " °K");
+          $("#temp3").text("Temp: " + Math.round((data.daily[3].temp.day - 273.25) * (9/5) + 32) + " °F");
           $("#humidity3").text("Humidity: " + data.daily[3].humidity + "%");
           // Day 4 Forcast
           $("#day4").text(moment().add(4, 'day').format("MMM Do, YYYY"));
           $("#icon4").attr({"src":"http://openweathermap.org/img/wn/" + data.daily[4].weather[0].icon + ".png"});
-          $("#temp4").text("Temp: " + data.daily[4].temp.day + " °K");
+          $("#temp4").text("Temp: " + Math.round((data.daily[4].temp.day - 273.25) * (9/5) + 32) + " °F");
           $("#humidity4").text("Humidity: " + data.daily[4].humidity + "%");
           // Day 5 Forcast
           $("#day5").text(moment().add(5, 'day').format("MMM Do, YYYY"));
           $("#icon5").attr({"src":"http://openweathermap.org/img/wn/" + data.daily[5].weather[0].icon + ".png"});
-          $("#temp5").text("Temp: " + data.daily[5].temp.day + " °K");
+          $("#temp5").text("Temp: " + Math.round((data.daily[5].temp.day - 273.25) * (9/5) + 32) + " °F");
           $("#humidity5").text("Humidity: " + data.daily[5].humidity + "%");
         })
 })

@@ -18,20 +18,36 @@ apiKey = "c46f2990592153f3323f237a20612ab6"
 
 var searchBtn = document.querySelector('#searchBtn');
 var citySearch = document.querySelector('#citySearch');
+var searchDataEl = document.querySelector("#searchData")
 var currentDate = moment().format("MM/DD/YYYY")
 
-function findCity(event) {
+renderSearches();
+
+function renderSearches() {
+  var city = localStorage.getItem("city");
+//If either email or password is null, we exit the function with return. Otherwise, we render the values using the textContent property in the userEmailSpan and userPasswordSpan elements
+  if (!city) {
+    return;
+  }
+  $("#searchData").text(city)
+  
+}
+
+searchBtn.addEventListener("click", function(event) {
   event.preventDefault();
-  let city = citySearch.value;
+  var city = citySearch.value;
   console.log(city)
   if (citySearch) {
     weatherData(city)
   } else {
     alert("Could not find city");
+    return;
   }
-  return;
-}
-searchBtn.addEventListener("click", findCity);
+  localStorage.setItem("city", city)
+  renderSearches();
+
+});
+
 
 
 function weatherData(city) {
@@ -67,6 +83,3 @@ function weatherData(city) {
 })
     return
 }
-
-
-

@@ -21,24 +21,28 @@ var searches = [];
 
 // WHEN I search for a city
 // THEN I am presented with current and future conditions for that city and that city is added to the search history
+renderSearches()
+
 function renderSearches() {
 
   var city = JSON.parse(localStorage.getItem("searches"));
-//If either email or password is null, we exit the function with return. Otherwise, we render the values using the textContent property in the userEmailSpan and userPasswordSpan elements
   if (!city) {
-    searches = city
+    // searches = city
     return;
   }
+  
+  return;
 }
 
-// function cityList() {
-//   var searchHistory = JSON.parse(localStorage.getItem("searches"));
-//   if (searchHistory ==)
+function cityList() {
+  cityList.html("")
+  $()
 
-// }
+}
 
 function storeSearches() {
   localStorage.setItem("searches", JSON.stringify(searches));
+  renderSearches()
 }
 
 searchBtn.addEventListener("click", function(event) {
@@ -52,13 +56,10 @@ searchBtn.addEventListener("click", function(event) {
     return;
   }
   searches.push(city)
-  citySearch.value = ""
-  
-  renderSearches();
+  $("#searchData").text(searches + " ")
   storeSearches();
- $("#searchData").text(searches + " ")
+ 
 return
-
 });
 
 

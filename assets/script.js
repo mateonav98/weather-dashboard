@@ -1,13 +1,4 @@
 
-
-// GIVEN a weather dashboard with form inputs
-
-
-
-// WHEN I click on a city in the search history
-// THEN I am again presented with current and future conditions for that city
-
-
 apiKey = "c46f2990592153f3323f237a20612ab6"
 
 
@@ -21,24 +12,10 @@ var searches = [];
 
 // WHEN I search for a city
 // THEN I am presented with current and future conditions for that city and that city is added to the search history
-renderSearches()
 
-function renderSearches() {
 
-  var city = JSON.parse(localStorage.getItem("searches"));
-  if (!city) {
-    // searches = city
-    return;
-  }
-  
-  return;
-}
 
-function cityList() {
-  cityList.html("")
-  $()
 
-}
 
 function storeSearches() {
   localStorage.setItem("searches", JSON.stringify(searches));
@@ -55,6 +32,7 @@ searchBtn.addEventListener("click", function(event) {
     alert("Could not find city");
     return;
   }
+  
   searches.push(city)
   $("#searchData").text(searches + " ")
   storeSearches();
@@ -62,6 +40,18 @@ searchBtn.addEventListener("click", function(event) {
 return
 });
 
+function renderSearches() {
+
+  var city = JSON.parse(localStorage.getItem("searches"));
+  if (city) {
+    // searches = city
+    return;
+  }
+
+  searches.push(city)
+  $("#searchData").text(searches + " ")
+}
+renderSearches();
 
 
 function weatherData(city) {
